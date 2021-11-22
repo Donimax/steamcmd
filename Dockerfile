@@ -18,8 +18,7 @@ ENV STEAMCMDDIR "${HOMEDIR}/steamcmd"
 # Download SteamCMD
 # Extract and delete archive
 RUN set -x \
-	&& dpkg --add-architecture i386 \
-  && echo "deb http://deb.debian.org/debian bullseye contrib non-free" >> /etc/apt/sources.list && \
+    && echo "deb http://deb.debian.org/debian bullseye contrib non-free" >> /etc/apt/sources.list \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 		lib32stdc++6 \
@@ -28,7 +27,7 @@ RUN set -x \
 		ca-certificates \
 		curl \
 		locales \
-    procps \
+                procps \
 	&& sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
 	&& dpkg-reconfigure --frontend=noninteractive locales \
 	&& useradd -u "${PUID}" -m "${USER}" \
@@ -40,7 +39,6 @@ RUN set -x \
                 && ln -s \"${STEAMCMDDIR}/linux32/steamclient.so\" \"${HOMEDIR}/.steam/sdk32/steamclient.so\" \
 		&& ln -s \"${STEAMCMDDIR}/linux32/steamcmd\" \"${STEAMCMDDIR}/linux32/steam\" \
 		&& ln -s \"${STEAMCMDDIR}/steamcmd.sh\" \"${STEAMCMDDIR}/steam.sh\"" \
-	&& ln -s "${STEAMCMDDIR}/linux32/steamclient.so" "/usr/lib/i386-linux-gnu/steamclient.so" \
 	&& ln -s "${STEAMCMDDIR}/linux64/steamclient.so" "/usr/lib/x86_64-linux-gnu/steamclient.so" \
 	&& apt-get remove --purge -y \
 		wget \
