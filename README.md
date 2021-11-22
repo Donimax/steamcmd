@@ -1,2 +1,2 @@
 # steamcmd
-Dockerfile for build a SteamCMD installation:
+Dockerfile for build a SteamCMD installation
