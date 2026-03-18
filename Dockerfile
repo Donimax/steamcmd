@@ -11,7 +11,7 @@ ENV HOMEDIR="/home/${USER}"
 ENV STEAMCMDDIR="${HOMEDIR}/steamcmd"
 
 RUN set -x \
-	&& echo "deb http://deb.debian.org/debian bookworm contrib non-free non-free-firmware" > /etc/apt/sources.list.d/non-free.list \
+	&& sed -i 's/^Components: main$/Components: main contrib non-free non-free-firmware/' /etc/apt/sources.list.d/debian.sources \
 	&& dpkg --add-architecture i386 \
 	&& apt-get update \
 	&& apt-get upgrade -y \
