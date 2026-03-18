@@ -12,6 +12,7 @@ ENV STEAMCMDDIR="${HOMEDIR}/steamcmd"
 
 RUN set -x \
 	&& echo "deb http://deb.debian.org/debian bookworm contrib non-free non-free-firmware" > /etc/apt/sources.list.d/non-free.list \
+	&& dpkg --add-architecture i386 \
 	&& apt-get update \
 	&& apt-get upgrade -y \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
